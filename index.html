@@ -13,7 +13,7 @@
 
         body {
             font-family: 'Arial', sans-serif;
-            background: linear-gradient(135deg, #e74c3c 0%, #c0392b 100%);
+            background: linear-gradient(135deg, #e0e0e0 0%, #b0b0b0 100%);
             min-height: 10vh;
             padding: 10px;
         }
@@ -79,29 +79,37 @@
         }
 
         .menu {
-            padding: 30px;
+            padding: 0; /* Removido padding para as seções ocuparem a largura total */
         }
 
         .category {
-            margin-bottom: 40px;
+            padding: 30px;
+            margin-bottom: 0; /* Removido margin-bottom para juntar as seções */
+            border-bottom: 1px solid #eee;
         }
 
         .category h2 {
             color: #e74c3c;
             font-size: 2em;
-            margin-bottom: 25px;
+            margin-bottom: 10px;
             padding-bottom: 10px;
             border-bottom: 3px solid #e74c3c;
             display: inline-block;
             font-weight: bold;
         }
+        
+        .category .category-subtitle {
+            display: block;
+            font-size: 1.1em;
+            color: #555;
+            margin-bottom: 25px;
+            font-style: italic;
+        }
 
         .items {
             display: grid;
-            gap: 20px;
+            gap: 25px;
         }
-
-
 
         .item h3 {
             color: #2c3e50;
@@ -112,17 +120,64 @@
 
         .item .description {
             color: #666;
-            margin-bottom: 15px;
+            margin-bottom: 10px;
             line-height: 1.5;
             font-size: 1em;
         }
+        
+        .item .price {
+            font-weight: bold;
+            color: #e74c3c;
+            font-size: 1.1em;
+        }
+        
+        .item .price span {
+            display: block; /* Faz cada preço ficar em uma linha */
+            margin-top: 5px;
+        }
 
+        /* --- ESTILOS DAS NOVAS SEÇÕES --- */
+        .category-destaques {
+            background-color: #ffffff;
+        }
+
+        .category-especiais {
+            background-color: #f8f9fa; /* Cinza bem claro */
+        }
+
+        .category-premium {
+            background-color: #2c3e50; /* Fundo escuro */
+            color: #ffffff;
+        }
+
+        .category-premium h2 {
+            color: #ffd700; /* Dourado */
+            border-bottom-color: #ffd700;
+        }
+
+        .category-premium .category-subtitle {
+            color: #bdc3c7; /* Cinza claro para o subtítulo */
+        }
+
+        .category-premium .item h3 {
+            color: #ffffff; /* Texto branco para o nome do item */
+        }
+
+        .category-premium .item .description {
+            color: #ecf0f1; /* Texto cinza claro para a descrição */
+        }
+
+        .category-premium .item .price {
+            color: #ffd700; /* Preço em dourado */
+        }
+        /* --- FIM DOS ESTILOS DAS SEÇÕES --- */
 
 
         .order-section {
             background: linear-gradient(135deg, #3498db, #2980b9);
             padding: 40px;
             color: white;
+            border-radius: 0 0 20px 20px; /* Arredonda cantos inferiores */
         }
 
         .order-section h2 {
@@ -149,8 +204,7 @@
         }
 
         .form-group input,
-        .form-group textarea,
-        .form-group select {
+        .form-group textarea {
             width: 100%;
             padding: 15px;
             border: none;
@@ -160,8 +214,7 @@
         }
 
         .form-group input:focus,
-        .form-group textarea:focus,
-        .form-group select:focus {
+        .form-group textarea:focus {
             outline: none;
             transform: scale(1.02);
             box-shadow: 0 5px 15px rgba(0,0,0,0.2);
@@ -170,16 +223,6 @@
         .form-group textarea {
             resize: vertical;
             min-height: 120px;
-        }
-
-        .form-group select {
-            cursor: pointer;
-            background-color: white;
-            color: #333;
-        }
-
-        .form-group select option {
-            padding: 10px;
         }
 
         .payment-methods {
@@ -197,7 +240,6 @@
             text-align: center;
             cursor: pointer;
             transition: all 0.3s ease;
-            position: relative;
         }
 
         .payment-option:hover {
@@ -241,27 +283,7 @@
             justify-content: center;
             gap: 10px;
             width: 100%;
-            position: relative;
-            overflow: hidden;
             margin-top: 20px;
-        }
-
-        .whatsapp-btn::before {
-            content: '';
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            width: 0;
-            height: 0;
-            background: rgba(255,255,255,0.2);
-            border-radius: 50%;
-            transition: all 0.5s ease;
-            transform: translate(-50%, -50%);
-        }
-
-        .whatsapp-btn:hover::before {
-            width: 300px;
-            height: 300px;
         }
 
         .whatsapp-btn:hover {
@@ -270,29 +292,17 @@
             box-shadow: 0 10px 25px rgba(37, 211, 102, 0.4);
         }
 
-        .whatsapp-btn span {
-            position: relative;
-            z-index: 1;
-        }
-
         @media (max-width: 768px) {
             .container {
                 margin: 5px;
                 border-radius: 15px;
             }
-            
             .header h1 {
                 font-size: 2.2em;
             }
-            
-            .menu, .order-section {
+            .category, .order-section {
                 padding: 20px;
             }
-            
-            .sizes {
-                justify-content: flex-start;
-            }
-
             .payment-methods {
                 grid-template-columns: 1fr 1fr;
             }
@@ -311,93 +321,142 @@
         </div>
 
         <div class="menu">
-            <div class="category">
-                <h2>🍕 PIZZAS</h2>
+            <!-- CATEGORIA 1: DESTAQUES -->
+            <div class="category category-destaques">
+                <h2>⭐ Destaques da Casa</h2>
+                <span class="category-subtitle">As Mais Pedidas</span>
                 <div class="items">
-                    <ul style="list-style: none; padding: 0;">
-                        <li style="margin-bottom: 15px;">
-                            <h3 style="margin-bottom: 5px;">Calabresa Paulista</h3>
-                            <p style="color: #666; margin-bottom: 5px;">Calabresa, cebola, azeitonas e orégano</p>
-                            <p style="font-weight: bold; color: #e74c3c;">M (6 fatias) - R$ 27,00 | G (8 fatias) - R$ 35,00</p>
-                        </li>
-                        <li style="margin-bottom: 15px;">
-                            <h3 style="margin-bottom: 5px;">Calabresa com Catupiry</h3>
-                            <p style="color: #666; margin-bottom: 5px;">Calabresa, catupiry, cebola, azeitonas e orégano</p>
-                            <p style="font-weight: bold; color: #e74c3c;">M (6 fatias) - R$ 34,00 | G (8 fatias) - R$ 44,00</p>
-                        </li>
-                        <li style="margin-bottom: 15px;">
-                            <h3 style="margin-bottom: 5px;">Calabresa</h3>
-                            <p style="color: #666; margin-bottom: 5px;">Mussarela, calabresa, cebola, azeitona e orégano</p>
-                            <p style="font-weight: bold; color: #e74c3c;">M (6 fatias) - R$ 32,00 | G (8 fatias) - R$ 42,00</p>
-                        </li>
-                        <li style="margin-bottom: 15px;">
-                            <h3 style="margin-bottom: 5px;">Frango com Requeijão</h3>
-                            <p style="color: #666; margin-bottom: 5px;">Frango, mussarela, requeijão, milho, azeitona e orégano</p>
-                            <p style="font-weight: bold; color: #e74c3c;">M (6 fatias) - R$ 32,00 | G (8 fatias) - R$ 42,00</p>
-                        </li>
-                        <li style="margin-bottom: 15px;">
-                            <h3 style="margin-bottom: 5px;">Frango</h3>
-                            <p style="color: #666; margin-bottom: 5px;">Frango, mussarela, milho, azeitona e orégano</p>
-                            <p style="font-weight: bold; color: #e74c3c;">M (6 fatias) - R$ 32,00 | G (8 fatias) - R$ 42,00</p>
-                        </li>
-                        <li style="margin-bottom: 15px;">
-                            <h3 style="margin-bottom: 5px;">4 Queijos</h3>
-                            <p style="color: #666; margin-bottom: 5px;">Mussarela, queijo coalho, parmesão e requeijão</p>
-                            <p style="font-weight: bold; color: #e74c3c;">M (6 fatias) - R$ 32,00 | G (8 fatias) - R$ 42,00</p>
-                        </li>
-                        <li style="margin-bottom: 15px;">
-                            <h3 style="margin-bottom: 5px;">Frango com Catupiry</h3>
-                            <p style="color: #666; margin-bottom: 5px;">Frango, mussarela, catupiry, bacon e orégano</p>
-                            <p style="font-weight: bold; color: #e74c3c;">M (6 fatias) - R$ 34,00 | G (8 fatias) - R$ 47,00</p>
-                        </li>
-                        <li style="margin-bottom: 15px;">
-                            <h3 style="margin-bottom: 5px;">Carne Seca</h3>
-                            <p style="color: #666; margin-bottom: 5px;">Mussarela, carne seca, bacon e cebola</p>
-                            <p style="font-weight: bold; color: #e74c3c;">M (6 fatias) - R$ 36,00 | G (8 fatias) - R$ 49,00</p>
-                        </li>
-                        <li style="margin-bottom: 15px;">
-                            <h3 style="margin-bottom: 5px;">Carne Seca Maluca</h3>
-                            <p style="color: #666; margin-bottom: 5px;">Carne seca, mussarela bacon cebola e batata palha.</p>
-                            <p style="font-weight: bold; color: #e74c3c;">M (6 fatias) - R$ 38,00 | G (8 fatias) - R$ 55,00</p>
-                        </li>
-                        <li style="margin-bottom: 15px;">
-                            <h3 style="margin-bottom: 5px;">Portuguesa</h3>
-                            <p style="color: #666; margin-bottom: 5px;">Presunto, cebola, ervilhas, ovos e mussarela</p>
-                            <p style="font-weight: bold; color: #e74c3c;">M (6 fatias) - R$ 34,00 | G (8 fatias) - R$ 47,00</p>
-                        </li>
-                        <li style="margin-bottom: 15px;">
-                            <h3 style="margin-bottom: 5px;">Moda da Casa</h3>
-                            <p style="color: #666; margin-bottom: 5px;">Mussarela, frango desfiado, bacon, milho e orégano</p>
-                            <p style="font-weight: bold; color: #e74c3c;">M (6 fatias) - R$ 34,00 | G (8 fatias) - R$ 47,00</p>
-                        </li>
-                    </ul>
+                    <div class="item">
+                        <h3>Calabresa</h3>
+                        <p class="description">Mussarela, calabresa, cebola, azeitona e orégano.</p>
+                        <p class="price">
+                            <span>M (6 fatias) - R$ 32,00</span>
+                            <span>G (8 fatias) - R$ 42,00</span>
+                        </p>
+                    </div>
+                    <div class="item">
+                        <h3>Calabresa Paulista</h3>
+                        <p class="description">Calabresa, cebola, azeitonas e orégano.</p>
+                        <p class="price">
+                            <span>M (6 fatias) - R$ 27,00</span>
+                            <span>G (8 fatias) - R$ 35,00</span>
+                        </p>
+                    </div>
+                    <div class="item">
+                        <h3>Frango</h3>
+                        <p class="description">Frango, mussarela, milho, azeitona e orégano.</p>
+                        <p class="price">
+                            <span>M (6 fatias) - R$ 32,00</span>
+                            <span>G (8 fatias) - R$ 42,00</span>
+                        </p>
+                    </div>
+                    <div class="item">
+                        <h3>Portuguesa</h3>
+                        <p class="description">Presunto, cebola, ervilhas, ovos e mussarela.</p>
+                        <p class="price">
+                            <span>M (6 fatias) - R$ 34,00</span>
+                            <span>G (8 fatias) - R$ 47,00</span>
+                        </p>
+                    </div>
                 </div>
             </div>
 
-            <div class="category">
+            <!-- CATEGORIA 2: ESPECIAIS -->
+            <div class="category category-especiais">
+                <h2>✨ Variedades Especiais</h2>
+                <span class="category-subtitle">Experimente Novos Sabores</span>
+                <div class="items">
+                    <div class="item">
+                        <h3>Calabresa com Catupiry</h3>
+                        <p class="description">Calabresa, catupiry, cebola, azeitonas e orégano.</p>
+                        <p class="price">
+                            <span>M (6 fatias) - R$ 34,00</span>
+                            <span>G (8 fatias) - R$ 44,00</span>
+                        </p>
+                    </div>
+                    <div class="item">
+                        <h3>Frango com Requeijão</h3>
+                        <p class="description">Frango, mussarela, requeijão, milho, azeitona e orégano.</p>
+                        <p class="price">
+                            <span>M (6 fatias) - R$ 32,00</span>
+                            <span>G (8 fatias) - R$ 42,00</span>
+                        </p>
+                    </div>
+                    <div class="item">
+                        <h3>4 Queijos</h3>
+                        <p class="description">Mussarela, queijo coalho, parmesão e requeijão.</p>
+                        <p class="price">
+                            <span>M (6 fatias) - R$ 32,00</span>
+                            <span>G (8 fatias) - R$ 42,00</span>
+                        </p>
+                    </div>
+                    <div class="item">
+                        <h3>Moda da Casa</h3>
+                        <p class="description">Mussarela, frango desfiado, bacon, milho e orégano.</p>
+                        <p class="price">
+                            <span>M (6 fatias) - R$ 34,00</span>
+                            <span>G (8 fatias) - R$ 47,00</span>
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- CATEGORIA 3: PREMIUM -->
+            <div class="category category-premium">
+                <h2>👑 Linha Premium</h2>
+                <span class="category-subtitle">Exclusivas e Sofisticadas</span>
+                <div class="items">
+                    <div class="item">
+                        <h3>Frango com Catupiry</h3>
+                        <p class="description">Frango, mussarela, catupiry, bacon e orégano.</p>
+                        <p class="price">
+                            <span>M (6 fatias) - R$ 34,00</span>
+                            <span>G (8 fatias) - R$ 47,00</span>
+                        </p>
+                    </div>
+                    <div class="item">
+                        <h3>Carne Seca</h3>
+                        <p class="description">Mussarela, carne seca, bacon e cebola.</p>
+                        <p class="price">
+                            <span>M (6 fatias) - R$ 36,00</span>
+                            <span>G (8 fatias) - R$ 49,00</span>
+                        </p>
+                    </div>
+                    <div class="item">
+                        <h3>Carne Seca Maluca</h3>
+                        <p class="description">Carne seca, mussarela, bacon, cebola e batata palha.</p>
+                        <p class="price">
+                            <span>M (6 fatias) - R$ 38,00</span>
+                            <span>G (8 fatias) - R$ 55,00</span>
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="category category-destaques">
                 <h2>🧀 BORDAS RECHEADAS</h2>
                 <div class="items">
                     <div class="item">
                         <h3>Bordas Especiais</h3>
                         <p class="description">Catupiry e Cheddar</p>
-                        <div class="sizes">
-                            <span class="size">M - R$ 6,00</span>
-                            <span class="size">G - R$ 8,00</span>
-                        </div>
+                        <p class="price">
+                            <span>M - R$ 6,00</span>
+                            <span>G - R$ 8,00</span>
+                        </p>
                     </div>
                 </div>
             </div>
 
-            <div class="category">
+            <div class="category category-especiais">
                 <h2>🥤 BEBIDAS</h2>
                 <div class="items">
                     <div class="item">
                         <h3>Refrigerantes</h3>
                         <p class="description">Coca-Cola e Guaraná</p>
-                        <div class="sizes">
-                            <span class="size">1 Litro - R$ 10,00</span>
-                            <span class="size">2 Litros - R$ 12,00</span>
-                        </div>
+                        <p class="price">
+                            <span>1 Litro - R$ 10,00</span>
+                            <span>2 Litros - R$ 12,00</span>
+                        </p>
                     </div>
                 </div>
             </div>
@@ -423,7 +482,7 @@
                 
                 <div class="form-group">
                     <label for="pedido">Seu Pedido:</label>
-                    <textarea id="pedido" name="pedido" placeholder="Digite aqui seu pedido detalhado:\nEx: 1 Pizza Calabresa Grande, 1 Refrigerante 2L, Borda de Catupiry..." required></textarea>
+                    <textarea id="pedido" name="pedido" placeholder="Digite aqui seu pedido detalhado:\nEx: 1 Pizza Calabresa G, 1 Refri 2L..." required></textarea>
                 </div>
 
                 <div class="form-group">
@@ -451,12 +510,9 @@
 
     <script>
         function selectPayment(paymentType) {
-            // Remove seleção anterior
             document.querySelectorAll('.payment-option').forEach(option => {
                 option.classList.remove('selected');
             });
-            
-            // Adiciona seleção ao item clicado
             document.getElementById(paymentType).checked = true;
             document.querySelector(`#${paymentType}`).parentElement.classList.add('selected');
         }
@@ -478,13 +534,11 @@
                 return;
             }
 
-            // Mapear valores para texto mais amigável
             const formasPagamento = {
                 'dinheiro': '💵 Dinheiro',
                 'pix': '📱 PIX'
             };
             
-            // Número do WhatsApp da CasadasPizzaass
             const numeroWhatsApp = '5598970100184';
             
             let mensagem = `🍕 *NOVO PEDIDO - CasadasPizzaass* 🍕\n\n` +
@@ -494,10 +548,9 @@
                            `*Pedido:*\n${pedido}\n\n` +
                            `*Forma de Pagamento:* ${formasPagamento[pagamento.value]}\n\n`;
             
-            // Adiciona informações do PIX se a forma de pagamento for PIX
             if (pagamento.value === 'pix') {
-                const chavePix = '98970100184'; // Sua chave PIX
-                const nomeRecebedorPix = 'Francisco de Sousa'; // Nome do recebedor do PIX
+                const chavePix = '98970100184';
+                const nomeRecebedorPix = 'Francisco de Sousa';
                 mensagem += `*Dados para PIX:*\n` +
                             `*Chave PIX:* ${chavePix}\n` +
                             `*Nome:* ${nomeRecebedorPix}\n\n` +
@@ -513,7 +566,6 @@
             window.open(linkWhatsApp, '_blank' );
         }
 
-        // Adiciona máscara ao campo telefone
         document.getElementById('telefone').addEventListener('input', function(e) {
             let value = e.target.value.replace(/\D/g, '');
             value = value.replace(/^(\d{2})(\d)/g, '($1) $2');
