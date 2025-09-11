@@ -220,7 +220,7 @@
             <!-- CATEGORIA 1: DESTAQUES -->
             <section class="category category-destaques">
                 <h2>⭐ Destaques da Casa</h2>
-                <p class="category-subtitle"></p>
+                <p class="category-subtitle">As Mais Pedidas</p>
                 <div class="items-grid">
                     <article class="item-card">
                         <h3>Calabresa</h3>
@@ -248,7 +248,7 @@
             <!-- CATEGORIA 2: ESPECIAIS -->
             <section class="category category-especiais">
                 <h2>✨ Variedades Especiais</h2>
-                <p class="category-subtitle"></p>
+                <p class="category-subtitle">Experimente Novos Sabores</p>
                 <div class="items-grid">
                     <article class="item-card">
                         <h3>Calabresa com Catupiry</h3>
@@ -396,7 +396,7 @@
                            `*Pagamento:* ${formasPagamento[pagamento.value]}\n\n`;
             
             if (pagamento.value === 'pix') {
-                const chavePix = '98970100184';
+                const chavePix = '98970100184'; // <-- NÚMERO DO PIX ATUALIZADO AQUI
                 const nomeRecebedorPix = 'Francisco de Sousa';
                 mensagem += `*Dados para PIX:*\n` +
                             `*Chave (Celular):* ${chavePix}\n` +
@@ -419,5 +419,3 @@
     </script>
 </body>
 </html>
-
-
