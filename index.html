@@ -228,6 +228,11 @@
                         <p class="price"><span>M (6 fatias) - R$ 32,00</span><span>G (8 fatias) - R$ 42,00</span></p>
                     </article>
                     <article class="item-card">
+                        <h3>Calabresa Ralada</h3>
+                        <p class="description">Mussarela, calabresa Ralada, cebola, azeitona e orégano.</p>
+                        <p class="price"><span>M (6 fatias) - R$ 35,50</span><span>G (8 fatias) - R$ 44,00</span></p>
+                    </article>
+                    <article class="item-card">
                         <h3>Calabresa Paulista</h3>
                         <p class="description">Calabresa, cebola, azeitonas e orégano.</p>
                         <p class="price"><span>M (6 fatias) - R$ 27,00</span><span>G (8 fatias) - R$ 35,00</span></p>
@@ -406,7 +411,7 @@
 
             mensagem += `_Pedido enviado via cardápio digital._`;
             
-            const linkWhatsApp = `https://wa.me/${numeroWhatsApp}?text=${encodeURIComponent(mensagem )}`;
+            const linkWhatsApp = `https://wa.me/${numeroWhatsApp}?text=${encodeURIComponent(mensagem  )}`;
             window.open(linkWhatsApp, '_blank');
         }
 
@@ -419,5 +424,3 @@
     </script>
 </body>
 </html>
-
-
