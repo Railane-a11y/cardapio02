@@ -22,33 +22,33 @@
             margin: 0;
             padding: 0;
             box-sizing: border-box;
+            scroll-behavior: smooth; /* Para rolagem suave */
         }
 
         body {
             font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
             background-color: #f0f2f5;
             line-height: 1.6;
+            padding-bottom: 80px; /* Espaço para o botão flutuante */
         }
 
         .container {
             max-width: 900px;
             margin: 0 auto;
             background: var(--fundo-claro);
-            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
-            overflow: hidden;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
         }
 
         .header {
             background: linear-gradient(45deg, var(--cor-primaria), var(--cor-secundaria));
             color: white;
             text-align: center;
-            padding: 40px 20px;
+            padding: 30px 20px;
         }
 
         .header h1 {
-            font-size: 2.5em;
+            font-size: 2.2em;
             font-weight: 700;
-            text-shadow: 1px 1px 3px rgba(0,0,0,0.2);
         }
 
         .header p {
@@ -56,12 +56,39 @@
             opacity: 0.9;
         }
 
+        /* --- MENU DE NAVEGAÇÃO RÁPIDA --- */
+        .nav-menu {
+            background-color: var(--fundo-claro);
+            padding: 10px;
+            border-bottom: 1px solid #eee;
+            text-align: center;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+            overflow-x: auto;
+            white-space: nowrap;
+        }
+        .nav-menu a {
+            color: var(--cor-primaria);
+            text-decoration: none;
+            font-weight: 600;
+            padding: 8px 12px;
+            border-radius: 20px;
+            transition: background-color 0.3s, color 0.3s;
+            display: inline-block;
+        }
+        .nav-menu a:hover {
+            background-color: var(--cor-primaria);
+            color: white;
+        }
+
         .delivery-info {
             background: var(--cor-destaque);
             color: white;
             text-align: center;
-            padding: 15px;
-            font-size: 1.1em;
+            padding: 12px;
+            font-size: 1em;
             font-weight: 600;
         }
 
@@ -71,7 +98,7 @@
         }
 
         .category h2 {
-            font-size: 1.8em;
+            font-size: 1.7em;
             font-weight: 700;
             margin-bottom: 8px;
             display: flex;
@@ -80,16 +107,16 @@
         }
 
         .category .category-subtitle {
-            font-size: 1.1em;
+            font-size: 1em;
             color: var(--cor-texto-claro);
-            margin-bottom: 30px;
+            margin-bottom: 25px;
             font-style: italic;
         }
 
         .items-grid {
             display: grid;
-            grid-template-columns: 1fr; /* Começa com 1 coluna para mobile */
-            gap: 30px;
+            grid-template-columns: 1fr;
+            gap: 25px;
         }
 
         .item-card {
@@ -98,7 +125,7 @@
         }
 
         .item-card h3 {
-            font-size: 1.3em;
+            font-size: 1.25em;
             color: var(--cor-texto-escuro);
             margin-bottom: 8px;
         }
@@ -106,7 +133,7 @@
         .item-card .description {
             color: var(--cor-texto-claro);
             margin-bottom: 12px;
-            flex-grow: 1; /* Faz a descrição ocupar o espaço disponível */
+            flex-grow: 1;
         }
 
         .item-card .price {
@@ -176,32 +203,53 @@
         .payment-option input { display: none; }
         .payment-option .payment-icon { font-size: 1.8em; }
         .payment-option .payment-text { font-weight: 600; font-size: 0.9em; display: block; margin-top: 5px; }
+        
+        /* --- BOTÃO FLUTUANTE DO WHATSAPP --- */
+        .whatsapp-btn-container {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            background: var(--fundo-claro);
+            padding: 10px 20px;
+            box-shadow: 0 -4px 10px rgba(0,0,0,0.1);
+            z-index: 200;
+        }
         .whatsapp-btn {
             background: #25d366;
             color: white;
             border: none;
-            padding: 18px;
-            font-size: 1.2em;
+            padding: 15px;
+            font-size: 1.1em;
             font-weight: 700;
             border-radius: 50px;
             cursor: pointer;
             width: 100%;
-            margin-top: 20px;
             transition: background-color 0.3s ease, transform 0.2s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
         }
         .whatsapp-btn:hover { background: #128c7e; transform: scale(1.02); }
 
         /* --- OTIMIZAÇÃO PARA TELAS MAIORES (TABLET/DESKTOP) --- */
         @media (min-width: 768px) {
+            body { padding-bottom: 0; } /* Remove padding no desktop */
             .container {
                 margin: 20px auto;
-                border-radius: 20px;
+                border-radius: 12px;
+                overflow: hidden;
             }
-            .header h1 { font-size: 3em; }
+            .header h1 { font-size: 2.8em; }
             .category { padding: 40px; }
             .items-grid {
-                grid-template-columns: 1fr 1fr; /* Duas colunas em telas maiores */
+                grid-template-columns: 1fr 1fr;
             }
+            .nav-menu { justify-content: center; }
+            /* Esconde o botão flutuante e mostra o botão original no formulário */
+            .whatsapp-btn-container { display: none; }
+            .order-form .whatsapp-btn-placeholder { display: block; }
         }
     </style>
 </head>
@@ -212,13 +260,21 @@
             <p>As melhores pizzas da cidade</p>
         </header>
 
+        <nav class="nav-menu">
+            <a href="#destaques">Destaques</a>
+            <a href="#especiais">Especiais</a>
+            <a href="#premium">Premium</a>
+            <a href="#bebidas">Bebidas</a>
+            <a href="#pedido">Pedido</a>
+        </nav>
+
         <div class="delivery-info">
             🚚 ENTREGA GRÁTIS PARA TODOS OS BAIRROS DA CIDADE
         </div>
 
         <main class="menu">
             <!-- CATEGORIA 1: DESTAQUES -->
-            <section class="category category-destaques">
+            <section id="destaques" class="category category-destaques">
                 <h2>⭐ Destaques da Casa</h2>
                 <p class="category-subtitle">As Mais Pedidas</p>
                 <div class="items-grid">
@@ -231,6 +287,11 @@
                         <h3>Calabresa</h3>
                         <p class="description">Mussarela, calabresa, cebola, azeitona e orégano.</p>
                         <p class="price"><span>M (6 fatias) - R$ 32,00</span><span>G (8 fatias) - R$ 42,00</span></p>
+                    </article>
+                    <article class="item-card">
+                        <h3>Clássica da Casa</h3>
+                        <p class="description">Mussarela, apresuntado ralado, cebola, azeitona e orégano.</p>
+                        <p class="price"><span>M (6 fatias) - R$ 28,90</span><span>G (8 fatias) - R$ 38,50</span></p>
                     </article>
                     <article class="item-card">
                         <h3>Calabresa Paulista</h3>
@@ -251,7 +312,7 @@
             </section>
 
             <!-- CATEGORIA 2: ESPECIAIS -->
-            <section class="category category-especiais">
+            <section id="especiais" class="category category-especiais">
                 <h2>✨ Variedades Especiais</h2>
                 <p class="category-subtitle">Experimente Novos Sabores</p>
                 <div class="items-grid">
@@ -279,7 +340,7 @@
             </section>
 
             <!-- CATEGORIA 3: PREMIUM -->
-            <section class="category category-premium">
+            <section id="premium" class="category category-premium">
                 <h2>👑 Linha Premium</h2>
                 <p class="category-subtitle">Exclusivas e Sofisticadas</p>
                 <div class="items-grid">
@@ -302,7 +363,7 @@
             </section>
 
             <!-- BORDAS E BEBIDAS -->
-            <section class="category category-destaques">
+            <section id="bordas" class="category category-destaques">
                 <h2>🧀 BORDAS RECHEADAS</h2>
                 <div class="items-grid">
                     <article class="item-card">
@@ -313,7 +374,7 @@
                 </div>
             </section>
 
-            <section class="category category-especiais">
+            <section id="bebidas" class="category category-especiais">
                 <h2>🥤 BEBIDAS</h2>
                 <div class="items-grid">
                     <article class="item-card">
@@ -325,7 +386,7 @@
             </section>
         </main>
 
-        <section class="order-section">
+        <section id="pedido" class="order-section">
             <h2>📝 Faça seu Pedido</h2>
             <form class="order-form">
                 <div class="form-group">
@@ -341,8 +402,8 @@
                     <input type="text" id="endereco" name="endereco" placeholder="Rua, número, bairro e referência" required>
                 </div>
                 <div class="form-group">
-                    <label for="pedido">Seu Pedido:</label>
-                    <textarea id="pedido" name="pedido" placeholder="Ex: 1 Pizza Calabresa G, 1 Refri 2L, Borda de Catupiry..." required></textarea>
+                    <label for="pedido-texto">Seu Pedido:</label>
+                    <textarea id="pedido-texto" name="pedido" placeholder="Ex: 1 Pizza Calabresa G, 1 Refri 2L, Borda de Catupiry..." required></textarea>
                 </div>
                 <div class="form-group">
                     <label>💳 Forma de Pagamento:</label>
@@ -359,13 +420,27 @@
                         </label>
                     </div>
                 </div>
-                <button type="button" class="whatsapp-btn" onclick="enviarPedido()">Enviar pelo WhatsApp</button>
+                <!-- Este botão só aparecerá em telas grandes (desktop) -->
+                <div class="whatsapp-btn-placeholder" style="display: none; margin-top: 20px;">
+                    <button type="button" class="whatsapp-btn" onclick="enviarPedido()">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path><path d="M14.05 2.9A10 10 0 0 1 21.1 10m-4.05-7.1A10 10 0 0 0 10 2.9"></path></svg>
+                        Enviar pelo WhatsApp
+                    </button>
+                </div>
             </form>
         </section>
     </div>
 
+    <!-- Botão Flutuante para Celular -->
+    <div class="whatsapp-btn-container">
+        <button type="button" class="whatsapp-btn" onclick="enviarPedido( )">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="white"><path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946.003-6.556 5.338-11.891 11.893-11.891 3.181.001 6.167 1.24 8.413 3.488 2.245 2.248 3.487 5.235 3.487 8.413.003 6.557-5.338 11.892-11.894 11.892-1.99-.001-3.951-.5-5.688-1.448l-6.305 1.654zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.886-.001 2.267.655 4.398 1.908 6.161l-1.317 4.814 4.899-1.301z"/></svg>
+            Finalizar Pedido
+        </button>
+    </div>
+
     <script>
-        function selectPayment(paymentType) {
+        function selectPayment(paymentType ) {
             document.querySelectorAll('.payment-option').forEach(option => {
                 option.classList.remove('selected');
             });
@@ -378,15 +453,18 @@
             const nome = document.getElementById('nome').value;
             const telefone = document.getElementById('telefone').value;
             const endereco = document.getElementById('endereco').value;
-            const pedido = document.getElementById('pedido').value;
+            const pedido = document.getElementById('pedido-texto').value;
             const pagamento = document.querySelector('input[name="pagamento"]:checked');
             
             if (!nome || !telefone || !endereco || !pedido) {
-                alert('Por favor, preencha todos os campos obrigatórios!');
+                alert('Por favor, preencha todos os campos do pedido!');
+                // Rola para o formulário para mostrar os campos vazios
+                document.getElementById('pedido').scrollIntoView({ behavior: 'smooth' });
                 return;
             }
             if (!pagamento) {
                 alert('Por favor, selecione uma forma de pagamento!');
+                document.getElementById('pedido').scrollIntoView({ behavior: 'smooth' });
                 return;
             }
 
@@ -401,7 +479,7 @@
                            `*Pagamento:* ${formasPagamento[pagamento.value]}\n\n`;
             
             if (pagamento.value === 'pix') {
-                const chavePix = '98970100184'; // <-- NÚMERO DO PIX ATUALIZADO AQUI
+                const chavePix = '98970100184';
                 const nomeRecebedorPix = 'Francisco de Sousa';
                 mensagem += `*Dados para PIX:*\n` +
                             `*Chave (Celular):* ${chavePix}\n` +
@@ -411,7 +489,7 @@
 
             mensagem += `_Pedido enviado via cardápio digital._`;
             
-            const linkWhatsApp = `https://wa.me/${numeroWhatsApp}?text=${encodeURIComponent(mensagem  )}`;
+            const linkWhatsApp = `https://wa.me/${numeroWhatsApp}?text=${encodeURIComponent(mensagem )}`;
             window.open(linkWhatsApp, '_blank');
         }
 
@@ -421,6 +499,21 @@
             value = value.replace(/(\d{5})(\d)/, '$1-$2');
             e.target.value = value.slice(0, 15);
         });
+
+        // Lógica para mostrar o botão de pedido correto dependendo do tamanho da tela
+        function handleResize() {
+            const floatingBtn = document.querySelector('.whatsapp-btn-container');
+            const formBtn = document.querySelector('.order-form .whatsapp-btn-placeholder');
+            if (window.innerWidth < 768) {
+                floatingBtn.style.display = 'block';
+                if(formBtn) formBtn.style.display = 'none';
+            } else {
+                floatingBtn.style.display = 'none';
+                if(formBtn) formBtn.style.display = 'block';
+            }
+        }
+        window.addEventListener('resize', handleResize);
+        window.addEventListener('load', handleResize); // Executa ao carregar a página
     </script>
 </body>
 </html>
